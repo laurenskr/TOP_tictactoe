@@ -1,4 +1,5 @@
 class Board
+  attr_accessor :board_marks
   def initialize
     @board_marks = {
       row_one: [" "," "," "],
@@ -14,6 +15,15 @@ class Board
   end
 end
 
+class Player
+  def initialize(mark)
+    @mark = mark
+  end
+  #make a move 
+  #def make_move(row,column)
+end
+
+
 b = Board.new
 
-b.display_board
+puts b.display_board
