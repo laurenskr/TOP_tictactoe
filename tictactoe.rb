@@ -13,17 +13,33 @@ class Board
     puts "#{value.join"|"}\n"
    end
   end
+  def mark_move(row,column,mark)
+     #make a move
+    case row
+      when 1
+        row = :row_one
+      when 2
+        row = :row_two
+      when 3
+        row = :row_three
+      else
+        puts "Incorrect move"
+    end
+    board_marks[row][column] = mark
+  end
 end
 
-class Player
+
+class Player < Board
   def initialize(mark)
     @mark = mark
   end
-  #make a move 
-  #def make_move(row,column)
 end
 
 
 b = Board.new
+player_x = Player.new("X")
+player_o = Player.new("O")
 
-puts b.display_board
+b.mark_move(2,2,"X")
+b.display_board
