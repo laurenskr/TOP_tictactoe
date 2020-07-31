@@ -1,4 +1,7 @@
 class Game
+  attr_accessor :win
+  def initialize
+  end
 end
 
 class Board < Game
@@ -36,19 +39,38 @@ class Player < Game
     if @game.board[spot-1].is_a? Numeric
       @made_moves.push(spot)
       @game.board[spot-1] = @mark
+      check_win
     else puts "Invalid pick!"
       ask_move
     end
   end
-end
 
+  def check_win
+    winning_combinations = [123,456,789,147,258,369,159,357]
+    winning_combinations.each do |i|
+      combi = i.to_s.split(//).map{|chr| chr.to_i}
+      if (combi - @made_moves.sort).empty?
+        $win = true
+        break
+      end
+    end
+  end
+end
 b = Board.new
 player_x = Player.new("X",b)
 player_y = Player.new("O",b)
-b.show_board
-while 1 != 2
-  player_x.ask_move
-  b.show_board
-  player_y.ask_move
-  b.show_board
+$win = false
+while $win == false
+  while $win == false
+    player_x.ask_move
+    b.show_board
+    break
+  end
+  while $win == false
+    player_y.ask_move
+    b.show_board
+    break
+  end
 end
+puts "YOU WON!"
+
